@@ -76,7 +76,8 @@ const grandTotal = derive([shoppingList], (list) => {
   return list.reduce((acc, item) => acc + item.qt * item.price, 0)
 })
 
-grandTotal.value // 40
+shoppingList.addItemToCart({ name: '🍌', qt: 1, price: 5 })
+grandTotal.value // 45
 ```
 
 You could also create your custom `DeriveAtom` if you want to with helper functions like `getPriceInEuro(...)` for example.
@@ -116,4 +117,7 @@ class ShoppingListAtom extends Atom<ShoppingListItem[]> {
     this._update(this._reducer(action))
   }
 }
+
+const shoppingList = new ShoppingListAtom([{name: '🍎', qt: 10, price: 3}, {name: '🍐', qt: 2, price: 5}])
+shoppingList.dispatch({ type: 'ADD_ITEM', item: { name: '🍌', qt: 1, price: 5 } })
 ```
