@@ -1,4 +1,4 @@
-# ⚛️ Nuclear Core
+# 🍱 Nuclear Core
 
 Framework agnostic reactive state management library.
 
