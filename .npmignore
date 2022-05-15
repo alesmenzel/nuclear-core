@@ -23,3 +23,6 @@ src/
 
 # Temp
 temp/
+
+# Docs
+*.md
