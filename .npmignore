@@ -1,0 +1,25 @@
+# Dotfiles
+/.*
+
+# Build
+rollup.config.js
+babel.config.js
+
+# Jest
+__snapshots__/
+**/*.test.js
+coverage/
+jest/
+
+# Npm pack output
+*.tgz
+
+# Typescript
+tsconfig.json
+types/
+
+# Source
+src/
+
+# Temp
+temp/
