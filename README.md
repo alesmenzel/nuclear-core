@@ -80,3 +80,40 @@ grandTotal.value // 40
 ```
 
 You could also create your custom `DeriveAtom` if you want to with helper functions like `getPriceInEuro(...)` for example.
+
+#### Reducer / State Machine paradigm
+
+Since you are able to define any additional functionality on your observable `Atom/DerivedAtom`, you could easily
+add a dispatch/reducer functionality if you'd like.
+
+```ts
+type ShoppingListItem = { name: string, qt: number, price: number }
+type ShoppingListAction =
+  | { type: 'ADD_ITEM', item: ShoppingListItem }
+  | { type: 'REMOVE_ITEM', name: string }
+  | { type: 'INCREASE_QT', name: string, count: number }
+  | { type: 'DECREASE_QT', name: string, count: number }
+
+class ShoppingListAtom extends Atom<ShoppingListItem[]> {
+  _reducer(action: ShoppingListAction): ShoppingListItem[] {
+    switch (action.type) {
+      case 'ADD_ITEM': {
+        return [...this._value, action.item];
+      },
+      case 'REMOVE_ITEM': {
+        return this._value.filter(item => item.name !== action.name);
+      },
+      case 'INCREASE_QT': {
+        return this._value.map(item => item.name === action.name ? {...item, qt: item.qt + action.count} : item);
+      },
+      case 'DECREASE_QT': {
+        return this._value.map(item => item.name === action.name ? {...item, qt: item.qt - action.count} : item);
+      }
+    }
+  }
+
+  dispatch(action: ShoppingListAction) {
+    this._update(this._reducer(action))
+  }
+}
+```
