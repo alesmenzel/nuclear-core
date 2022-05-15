@@ -51,7 +51,7 @@ const grandTotal = derive([shoppingList], (list) => {
 grandTotal.value // 40
 ```
 
-### Custom Atom
+#### Custom Atom
 
 Atom by itself is pretty plain reactive container, would it be great if we could create a reactive model with helper methods like `addItemToCart(...)` or `increase/decreaseQuantity(...)`? I think it would.
 
